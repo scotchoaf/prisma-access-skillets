@@ -22,7 +22,7 @@ labels:
 # ---------------------------------------------------------------------
 variables:
 
-  - name: filename
+  - name: conf_filename
     description: name of imported file
     default: prisma_access_full_config.xml
     type_hint: text
@@ -39,7 +39,7 @@ snippets:
                   <from-xpath>/config/devices/entry[@name="localhost.localdomain"]/template/entry[@name="Mobile_User_Template"]</from-xpath>
                   <to-xpath>/config/devices/entry[@name="localhost.localdomain"]/template/entry[@name="Mobile_User_Template"]</to-xpath>
                   <mode>merge</mode>
-                  <from>{{ filename }}</from>
+                  <from>{{ conf_filename }}</from>
               </partial>
           </config>
       </load>
@@ -119,7 +119,7 @@ snippets:
                   <from-xpath>/config/devices/entry[@name="localhost.localdomain']/template-stack/entry[@name='Mobile_User_Template_Stack"]</from-xpath>
                   <to-xpath>/config/devices/entry[@name="localhost.localdomain']/template-stack/entry[@name='Mobile_User_Template_Stack"]</to-xpath>
                   <mode>merge</mode>
-                  <from>{{ filename }}</from>
+                  <from>{{ conf_filename }}</from>
               </partial>
           </config>
       </load>
@@ -133,7 +133,7 @@ snippets:
                   <from-xpath>/config/devices/entry[@name="localhost.localdomain']/device-group/entry[@name="Mobile_User_Device_Group"]</from-xpath>
                   <to-xpath>/config/devices/entry[@name="localhost.localdomain']/device-group/entry[@name="Mobile_User_Device_Group"]</to-xpath>
                   <mode>merge</mode>
-                  <from>{{ filename }}</from>
+                  <from>{{ conf_filename }}</from>
               </partial>
           </config>
       </load>
@@ -147,7 +147,7 @@ snippets:
                   <from-xpath>/config/devices/entry[@name="localhost.localdomain']/plugins/cloud_services/mobile-users</from-xpath>
                   <to-xpath>/config/devices/entry[@name="localhost.localdomain']/plugins/cloud_services/mobile-users</to-xpath>
                   <mode>merge</mode>
-                  <from>{{ filename }}</from>
+                  <from>{{ conf_filename }}</from>
               </partial>
           </config>
       </load>
