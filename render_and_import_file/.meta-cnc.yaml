@@ -19,15 +19,15 @@ variables:
   - name: TARGET_IP
     description: NGFW IP or Hostname
     default: 192.168.55.10
-    type_hint: hidden
+    type_hint: text
   - name: TARGET_USERNAME
     description: NGFW Username
     default: admin
-    type_hint: hidden
+    type_hint: text
   - name: TARGET_PASSWORD
     description: NGFW Password
     default:
-    type_hint: hidden
+    type_hint: password
   - name: infra_subnet
     description: Infrastructure Subnet
     default: 192.168.254.0/24
