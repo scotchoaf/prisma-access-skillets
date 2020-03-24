@@ -27,10 +27,80 @@ variables:
     default: prisma_access_full_config.xml
     type_hint: text
     help_text: file name used in the load config partial commands
+  - name: load_conf_options
+    description: choose load config partial items
+    default: ['service', 'mobile']
+    type_hint: checkbox
+    cbx_list:
+      - key: Service Setup
+        value: service
+      - key: Mobile Users
+        value: mobile
 
 snippets:
 
+  - name: svc_conn_template
+    when: "'service' in load_conf_options"
+    cmd: op
+    cmd_str: |-
+      <load>
+          <config>
+              <partial>
+                  <from-xpath>/config/devices/entry[@name="localhost.localdomain"]/template/entry[@name="Service_Conn_Template"]</from-xpath>
+                  <to-xpath>/config/devices/entry[@name="localhost.localdomain"]/template/entry[@name="Service_Conn_Template"]</to-xpath>
+                  <mode>merge</mode>
+                  <from>{{ conf_filename }}</from>
+              </partial>
+          </config>
+      </load>
+
+  - name: svc_conn_template_stack
+    when: "'service' in load_conf_options"
+    cmd: op
+    cmd_str: |-
+      <load>
+          <config>
+              <partial>
+                  <from-xpath>/config/devices/entry[@name="localhost.localdomain']/template-stack/entry[@name='Service_Conn_Template_Stack"]</from-xpath>
+                  <to-xpath>/config/devices/entry[@name="localhost.localdomain']/template-stack/entry[@name='Service_Conn_Template_Stack"]</to-xpath>
+                  <mode>merge</mode>
+                  <from>{{ conf_filename }}</from>
+              </partial>
+          </config>
+      </load>
+
+  - name: svc_conn_device_group
+    when: "'service' in load_conf_options"
+    cmd: op
+    cmd_str: |-
+      <load>
+          <config>
+              <partial>
+                  <from-xpath>/config/devices/entry[@name="localhost.localdomain']/device-group/entry[@name="Service_Conn_Device_Group"]</from-xpath>
+                  <to-xpath>/config/devices/entry[@name="localhost.localdomain']/device-group/entry[@name="Service_Conn_Device_Group"]</to-xpath>
+                  <mode>merge</mode>
+                  <from>{{ conf_filename }}</from>
+              </partial>
+          </config>
+      </load>
+
+  - name: svc_conn_onboarding
+    when: "'service' in load_conf_options"
+    cmd: op
+    cmd_str: |-
+      <load>
+          <config>
+              <partial>
+                  <from-xpath>/config/devices/entry[@name="localhost.localdomain']/plugins/cloud_services/service-connection</from-xpath>
+                  <to-xpath>/config/devices/entry[@name="localhost.localdomain']/plugins/cloud_services/service-connection</to-xpath>
+                  <mode>merge</mode>
+                  <from>{{ conf_filename }}</from>
+              </partial>
+          </config>
+      </load>
+
   - name: mobile_user_template
+    when: "'mobile' in load_conf_options"
     cmd: op
     cmd_str: |-
       <load>
@@ -45,6 +115,7 @@ snippets:
       </load>
 
   - name: set_template_target
+    when: "'mobile' in load_conf_options"
     cmd: op
     cmd_str: |-
       <set>
@@ -60,6 +131,7 @@ snippets:
       </set>
 
   - name: ca_cert_gen
+    when: "'mobile' in load_conf_options"
     cmd: op
     cmd_str: |-
       <request>
@@ -78,6 +150,7 @@ snippets:
       </request>
 
   - name: ca_cert_gen
+    when: "'mobile' in load_conf_options"
     cmd: op
     cmd_str: |-
       <request>
@@ -98,6 +171,7 @@ snippets:
       </request>
 
   - name: set_template_target_none
+    when: "'mobile' in load_conf_options"
     cmd: op
     cmd_str: |-
       <set>
@@ -111,6 +185,7 @@ snippets:
       </set>
 
   - name: mobile_user_template_stack
+    when: "'mobile' in load_conf_options"
     cmd: op
     cmd_str: |-
       <load>
@@ -125,6 +200,7 @@ snippets:
       </load>
 
   - name: mobile_user_device_group
+    when: "'mobile' in load_conf_options"
     cmd: op
     cmd_str: |-
       <load>
@@ -138,7 +214,8 @@ snippets:
           </config>
       </load>
 
-  - name: mobile_user_device_group
+  - name: mobile_user_onboarding
+    when: "'mobile' in load_conf_options"
     cmd: op
     cmd_str: |-
       <load>
