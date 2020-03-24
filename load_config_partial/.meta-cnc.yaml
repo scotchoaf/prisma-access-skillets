@@ -9,8 +9,6 @@ description: |
   and creates a certificate and CA used in the mobile user template
 
 type: panorama
-# preload static or default-based templates
-extends:
 
 # grouping of like snippets for dynamic menu creation in panhandler
 labels:
