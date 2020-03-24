@@ -27,9 +27,9 @@ from skilletlib.exceptions import SkilletLoaderException
 @click.option("-u", "--TARGET_USERNAME", help="Firewall Username (admin)", type=str, default="admin")
 @click.option("-p", "--TARGET_PASSWORD", help="Firewall Password (admin)", type=str, default="admin")
 @click.option("-f", "--conf_filename", help="configuration file name", type=str, default="prisma_access_full_config.xml")
-def cli(target_ip, target_port, target_username, target_password):
+def cli(target_ip, target_port, target_username, target_password, conf_filename):
     """
-    Load a baseline configuration. Defaults values in parenthesis.
+    Import a full configuration. Defaults values in parenthesis.
     """
 
     try:
@@ -40,7 +40,7 @@ def cli(target_ip, target_port, target_username, target_password):
                        api_port=target_port
                        )
 
-        if not device.import_file(prisma_access_full_config.xml, file_contents, 'configuration'):
+        if not device.import_file(conf_filename, file_contents, 'configuration'):
             exit(1)
 
         exit(0)
