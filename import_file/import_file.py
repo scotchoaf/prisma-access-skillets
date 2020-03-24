@@ -40,7 +40,7 @@ def cli(target_ip, target_port, target_username, target_password, conf_filename)
                        api_port=target_port
                        )
 
-        if not device.import_file(conf_filename, file_contents, 'configuration'):
+        if not device.import_file(conf_filename):
             exit(1)
 
         exit(0)
