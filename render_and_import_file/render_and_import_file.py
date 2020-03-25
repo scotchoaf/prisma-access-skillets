@@ -13,7 +13,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-# Authors: Edward Arcuri, Nathan Embery
+# Authors: Edward Arcuri, Nathan Embery, Scott Shoaf
 
 import click
 import ast
@@ -88,6 +88,7 @@ def cli(target_ip, target_port, target_username, target_password, infra_subnet, 
     template = env.get_template('prisma_access_full_config_vars.conf')
     file_contents = template.render(context)
 
+    # create device option and use panoply import_file to send a config file to the device
     try:
 
         device = Panos(api_username=target_username,
