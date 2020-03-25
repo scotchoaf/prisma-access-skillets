@@ -308,6 +308,11 @@ variables:
     default: Paloalto2
     type_hint: password
     help_text: creates a config file phash entry to customize the user2 password
+  - name: conf_filename
+    description: name of xml config file to be generated
+    default: prisma_access_full_config.xml
+    type_hint: text
+    help_text: leave as default to match the load config partial manual helper commands
 
 # Snippets is an ordered list of configuration xml fragments that will be pushed to the PAN-OS NGFW. The xpath
 # determines where in the configuration hierarchy the xml fragment will be set. 'file' indicates the name of the file
