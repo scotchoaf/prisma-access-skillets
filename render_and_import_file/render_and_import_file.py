@@ -16,7 +16,6 @@
 # Authors: Edward Arcuri, Nathan Embery, Scott Shoaf
 
 import click
-import ast
 from skilletlib import Panos
 from skilletlib.exceptions import LoginException
 from skilletlib.exceptions import SkilletLoaderException
@@ -24,14 +23,6 @@ from jinja2 import Environment, FileSystemLoader
 from passlib.hash import md5_crypt
 
 defined_filters = ['md5_hash']
-
-class PythonLiteralOption(click.Option):
-
-    def type_cast_value(self, ctx, value):
-        try:
-            return ast.literal_eval(value)
-        except:
-            raise click.BadParameter(value)
 
 def md5_hash(txt):
     '''
@@ -51,9 +42,9 @@ def md5_hash(txt):
 @click.option("-b", "--infra_bgp_as", help="infrastructure BGP AS", type=str, default="65534")
 @click.option("-ph", "--portal_hostname", help="portal hostnamne", type=str, default="my-subdomain")
 @click.option("-reg", "--deployment_region", help="deployment region", type=str, default="americas")
-@click.option("-lam", "--deployment_locations_americas", help="deployment locations americas", type=str, default="'us-east-1', 'us-west-1'")
-@click.option("-leu", "--deployment_locations_europe", help="deployment locations europe", type=str, default="'eu-west-1'")
-@click.option("-lap", "--deployment_locations_apac", help="deployment locations apac", type=str, default="'australia-east'")
+@click.option("-lam", "--deployment_locations_americas", help="deployment locations americas", type=str, default="us-east-1, us-west-1")
+@click.option("-leu", "--deployment_locations_europe", help="deployment locations europe", type=str, default="eu-west-1")
+@click.option("-lap", "--deployment_locations_apac", help="deployment locations apac", type=str, default="australia-east")
 @click.option("-pool", "--ip_pool_cidr", help="regional ip pool", type=str, default="192.168.2.0/23")
 @click.option("-u1", "--user1_password", help="User1 password", type=str, default="Paloalto1")
 @click.option("-u2", "--user2_password", help="User2 password", type=str, default="Paloalto2")
@@ -72,9 +63,9 @@ def cli(target_ip, target_port, target_username, target_password, infra_subnet, 
     context['infra_bgp_as'] = infra_bgp_as
     context['portal_hostname'] = portal_hostname
     context['deployment_region'] = deployment_region
-    context['deployment_locations_americas'] = deployment_locations_americas
-    context['deployment_locations_europe'] = deployment_locations_europe
-    context['deployment_locations_apac'] = deployment_locations_apac
+    context['deployment_locations_americas'] = deployment_locations_americas.split(',')
+    context['deployment_locations_europe'] = deployment_locations_europe.split(',')
+    context['deployment_locations_apac'] = deployment_locations_apac.split(',')
     context['ip_pool_cidr'] = ip_pool_cidr
     context['user1_password'] = user1_password
     context['user2_password'] = user2_password
