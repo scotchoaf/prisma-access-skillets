@@ -66,8 +66,6 @@ def cli(target_ip, target_port, target_username, target_password, infra_subnet, 
     Import a full configuration. Defaults values in parenthesis.
     """
 
-    print(deployment_region)
-    print(deployment_locations_americas)
     # creating the jinja context from the skillet vars
     context = dict()
     context['infra_subnet'] = infra_subnet
