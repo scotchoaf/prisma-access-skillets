@@ -1,0 +1,55 @@
+# skillet preamble information used by panhandler
+# ---------------------------------------------------------------------
+# unique snippet name
+name: prismaAccess_validations
+# label used for menu selection
+label: Prisma Access Validations
+description: check Panorama for key Prisma Access configuration elements
+
+type: pan_validation
+
+
+# grouping of like snippets for dynamic menu creation in panhandler
+labels:
+  collection:
+    - Prisma Access
+
+# ---------------------------------------------------------------------
+# end of preamble section
+
+# variables section
+variables:
+  - name: hostname
+    description: Firewall hostname
+    default: myFirewall
+    type_hint: text
+  - name: choices
+    description: sample dropdown list
+    default: choices
+    type_hint: dropdown
+    dd_list:
+      - key: option1
+        value: option1
+      - key: option2
+        value: option2
+  - name: snippets
+    type_hint: hidden
+    default: ''
+# ---------------------------------------------------------------------
+# end of variables section
+
+# snippets section
+# ---------------------------------------------------------------------
+snippets:
+# example output capture and test structure layout
+
+  - name: check_cloud_service_plugin_version
+    cmd: cli
+    cmd_str: show system info
+    outputs:
+    - name: cloud_service_plugin_version
+      capture_pattern: ./plugin_versions/entry[@name="cloud_services"]/@version
+
+
+# ---------------------------------------------------------------------
+# end of snippets section
