@@ -54,7 +54,7 @@ snippets:
 
   - name: check_version
     label: Check plugin version
-    test: cloud_services_plugin_debug == '1.5.0'
+    test: cloud_services_plugin_debug != '1.5.0'
     fail_message: |
       version is {{ cloud_service_plugin_debug }}
     pass_message: |
