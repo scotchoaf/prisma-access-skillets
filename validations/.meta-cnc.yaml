@@ -56,9 +56,9 @@ snippets:
     label: Check plugin version
     test: cloud_services_plugin_debug == '1.5.0'
     fail_message: |
-      version is
+      version is {{ cloud_service_plugin_debug }}
     pass_message: |
-      verson is
+      verson is {{ cloud_service_plugin_debug }}
     documentation_link: http://www.google.com
 
 # ---------------------------------------------------------------------
