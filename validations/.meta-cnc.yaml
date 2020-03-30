@@ -53,12 +53,12 @@ snippets:
         capture_value: /config/devices/entry[@name='localhost.localdomain']/plugins/cloud_services/@version
 
   - name: check_version
-    label: Check plugin version
-    test: cloud_services_plugin_debug equalto '1.5.0'
+    label: Check cloud services plugin version is 1.5.0 or higher
+    test: (cloud_service_plugin_debug.split('.')[0] ~ '.' ~ cloud_service_plugin_debug.split('.')[1] | float ) >= '1.5'
     fail_message: |
-      version is {{ cloud_service_plugin_debug }}
+      current version is {{ cloud_service_plugin_debug }}
     pass_message: |
-      verson is {{ cloud_service_plugin_debug }}
+      current version is {{ cloud_service_plugin_debug }}
     documentation_link: http://www.google.com
 
 # ---------------------------------------------------------------------
