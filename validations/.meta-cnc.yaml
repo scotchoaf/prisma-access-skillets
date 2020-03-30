@@ -1,55 +1,67 @@
 # skillet preamble information used by panhandler
 # ---------------------------------------------------------------------
 # unique snippet name
-name: prismaAccess_validations
+name: DLP-Verify-Panorama
 # label used for menu selection
-label: Prisma Access Validations
-description: check Panorama for key Prisma Access configuration elements
-
+label: DLP-Verification-Panorama
+description: Skillet to test whether Panorama is connected to Enterprise DLP and ready to build policies leveraging advanced DLP Data Patterns and Data Profiles
+# type of device configuration
+# common types are panorama, panos, and template
+# https://github.com/PaloAltoNetworks/panhandler/blob/develop/docs/metadata_configuration.rst
 type: pan_validation
-
-
+# preload static or default-based templates
+extends:
 # grouping of like snippets for dynamic menu creation in panhandler
 labels:
   collection:
-    - Prisma Access
-
+    - DLP
 # ---------------------------------------------------------------------
 # end of preamble section
-
 # variables section
+# ---------------------------------------------------------------------
+# variables used in the configuration templates
+# type_hint defines the form field used by panhandler
+# type_hints examples include text, ip_address, or dropdown
 variables:
   - name: hostname
-    description: Firewall hostname
-    default: myFirewall
+    description: Panorama hostname or IP address
+    default: Panorama
     type_hint: text
-  - name: choices
-    description: sample dropdown list
-    default: choices
-    type_hint: dropdown
-    dd_list:
-      - key: option1
-        value: option1
-      - key: option2
-        value: option2
+#  - name: choices
+#    description: sample dropdown list
+#    default: choices
+#    type_hint: dropdown
+#    dd_list:
+#      - key: option1
+#        value: option1
+#      - key: option2
+#        value: option2
   - name: snippets
     type_hint: hidden
     default: ''
 # ---------------------------------------------------------------------
 # end of variables section
-
 # snippets section
 # ---------------------------------------------------------------------
 snippets:
-# example output capture and test structure layout
-
-  - name: check_cloud_service_plugin_version
-    cmd: cli
-    cmd_str: show system info
+# test for Cloud Services Plugin 1.5.0 or greater
+  - name: cloud_services
+    cmd: parse
+    variable: config
     outputs:
-    - name: cloud_service_plugin_version
-      capture_pattern: ./plugin_versions/entry[@name="cloud_services"]/@version
+      - name: cloud_service_plugin_debug
+        capture_list: /config/devices/entry[@name='localhost.localdomain']/plugins/cloud_services/@version
 
+
+  - name: check_version
+    label: Check plugin version
+    test: cloud_services_plugin_debug == '1.5.0'
+    documentation_link: http://google.com
+    fail_message: |
+      {{ cloud_services_plugin_debug }}
+    pass_message: |
+      {{ cloud_services_plugin_debug }}
+    documentation_link: http://www.google.com
 
 # ---------------------------------------------------------------------
 # end of snippets section
