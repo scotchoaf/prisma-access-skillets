@@ -21,7 +21,7 @@ def cli(target_ip, target_port, target_username, target_password, mobile_user):
     base64_bytes = base64.b64encode(username_bytes)
     base64_username = base64_bytes.decode('ascii')
 
-    print(f'encoded mobile username is: {base64_username}')
+    print(f'encoded mobile username {mobile_user} is: {base64_username}')
 
     try:
 
