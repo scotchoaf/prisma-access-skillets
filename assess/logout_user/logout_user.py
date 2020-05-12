@@ -37,7 +37,7 @@ def cli(target_ip, target_port, target_username, target_password, mobile_user):
             f'<request><plugins><cloud_services><gpcs><logout_mobile_user><gateway><computer>*</computer>' \
             f'<user>{base64_username}=</user></gateway></logout_mobile_user></gpcs></cloud_services></plugins></request>'
 
-        if not device.execute_cmd('op', params):
+        if not device.execute_cmd(params):
             exit(1)
 
         print(device.xapi.xml_result())
