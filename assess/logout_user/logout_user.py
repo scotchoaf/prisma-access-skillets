@@ -32,7 +32,6 @@ def cli(target_ip, target_port, target_username, target_password, mobile_user):
 
                        )
         params = {}
-        params['cmd'] = 'op'
         params['cmd_str'] = \
             f'<request><plugins><cloud_services><gpcs><logout_mobile_user><gateway><computer>*</computer>' \
             f'<user>{base64_username}=</user></gateway></logout_mobile_user></gpcs></cloud_services></plugins></request>'
